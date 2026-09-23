@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokéDiario — aprende 5 al día</title>
+  <meta name="theme-color" content="#13202b" />
+  <meta name="description" content="Cinco Pokémon al día para aprender por generaciones." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://pokeapi.co" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <a class="brand" href="#" aria-label="PokéDiario">POKÉ<span>DIARIO</span></a>
+      <p class="tagline">Cinco encuentros. Un poco más de memoria.</p>
+      <div id="streak" class="streak">⚡ Racha: 0 días</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow" id="today">MISIÓN DE HOY</p>
+        <h1>Conoce a tu equipo de <em>5</em>.</h1>
+        <p>Explora sus fichas, responde preguntas cortas y domina una generación a la vez.</p>
+      </div>
+      <div class="generation-picker">
+        <label for="generation">Tu ruta de aprendizaje</label>
+        <select id="generation" aria-label="Seleccionar generación"></select>
+        <small id="generation-note">Cargando generaciones…</small>
+      </div>
+    </section>
+
+    <section class="progress-card" aria-label="Progreso de hoy">
+      <div class="progress-label"><span>Progreso de hoy</span><strong id="progress-text">0 / 5</strong></div>
+      <div class="progress-track"><div id="progress-bar"></div></div>
+    </section>
+    <section class="learning-base" aria-label="Base de aprendizaje">
+      <div class="base-title"><p class="eyebrow">TU BASE</p><h2>Lo que ya conoces</h2></div>
+      <div class="stat"><strong id="unique-count">0</strong><span>Pokémon aprendidos</span></div>
+      <div class="stat"><strong id="review-count">0</strong><span>cartas realizadas</span></div>
+      <div class="stat"><strong id="session-count">0</strong><span>días completados</span></div>
+    </section>
+
+    <section id="cards" class="cards" aria-live="polite">
+      <div class="loading">Preparando los Pokémon de hoy…</div>
+    </section>
+
+    <section id="quiz" class="quiz hidden" aria-live="polite">
+      <p class="eyebrow">MINI RETO</p>
+      <h2 id="quiz-question">¿Listo?</h2>
+      <div id="answers" class="answers"></div>
+      <p id="quiz-feedback" class="feedback"></p>
+      <button id="next-question" class="ghost hidden">Otra pregunta</button>
+    </section>
+
+    <section class="source-note">
+      <strong>Datos con trazabilidad.</strong> Cada ficha enlaza a la Pokédex oficial. Los datos estructurados se consultan desde PokeAPI y se guardan en tu navegador para crear el plan diario.
+    </section>
+  </main>
+  <template id="card-template">
+    <article class="pokemon-card" tabindex="0">
+      <div class="card-inner">
+        <section class="card-face card-front">
+          <div class="card-top"><span class="number"></span><span class="learned-mark">○</span></div>
+          <img class="art" alt="" />
+          <div class="front-content"><p class="front-prompt">¿Quién es este Pokémon?</p><button class="flip-button">Voltear ficha ↻</button></div>
+        </section>
+        <section class="card-face card-back">
+          <div class="card-top"><span class="number"></span><span class="learned-mark">○</span></div>
+          <div class="card-content">
+            <div class="title-row"><h2></h2><span class="types"></span></div>
+            <p class="gen"></p><dl class="facts"></dl>
+            <a class="official-link" target="_blank" rel="noreferrer">Ver ficha oficial ↗</a>
+            <button class="learn-button">Ya lo aprendí</button><button class="flip-button secondary">↺ Ver imagen</button>
+          </div>
+        </section>
+      </div>
+    </article>
+  </template>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+</html>
