@@ -1,1 +1,0 @@
-C:/Users/shara/Documents/Codex/2026-09-23/ayudame-a-hcer-una-pokedex-tipo/outputs/pokedex-aprendizaje/index.html
